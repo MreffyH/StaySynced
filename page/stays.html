@@ -3,32 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random QR Code Generator</title>
+    <title>StaySynced - My Stay</title>
     <link rel="stylesheet" href="style/stays.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script type="module" src="../auth/act/session.js" defer></script>
 </head>
 <body>
     <div class="app">
         <header>
-            <h1>My Stay</h1>
-        </header>  
-        <div id="qrcode"></div>
-        <p id="randomNumber"></p>
+            <div class="header-content">
+                <button class="back-button" onclick="history.back()">
+                    <span class="icon-chevron-left"></span>
+                </button>
+                <h1>My Stay</h1>
+                <button class="info-button">
+                    <span class="icon-info"></span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div id="logged-out-state" class="hidden">
+                <p>Your upcoming stay will be shown here. Please login to your account first in the <b>profile</b> page.</p>
+            </div>
+            <div id="logged-in-state">
+                <div class="stay-card">
+                    <div class="stay-info">
+                        <p class="suite">Room Type</p>
+                        <h2>Room 135 - President Suite</h2>
+                    </div>
+                    <div class="qr-section">
+                        <h3>QR Code</h3>
+                        <div id="qrcode" class="qr-container"></div>
+                    </div>
+
+                    <div class="assistance-section">
+                        <h3>Need any assistance?</h3>
+                        <div class="assistance-buttons">
+                            <button class="btn-assistance">
+                                <span class="icon-message-circle"></span>
+                                Chat Host
+                            </button>
+                            <button class="btn-assistance emergency">
+                                <span class="icon-phone"></span>
+                                Call Host
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkout Section -->
+                <div class="checkout-section">
+                    <h3>Checkout Information</h3>
+                    <div class="checkout-details">
+                        <p><strong>Check-in:</strong> <span id="checkinDate">2024-01-15 14:00</span></p>
+                        <p><strong>Check-out:</strong> <span id="checkoutDate">2024-01-16 12:00</span></p>
+                    </div>
+                    <button class="btn-checkout">Proceed to Checkout</button>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="../index.html">
+                <span class="icon-home"></span>
+                Home
+            </a>
+            <a href="stays.html" class="active">
+                <span class="icon-calendar"></span>
+                Stays
+            </a>
+            <a href="profile.html">
+                <span class="icon-user"></span>
+                Profile
+            </a>
+        </nav>
     </div>
-    <nav class="bottom-nav">
-        <a href="../index.html">
-            <span class="icon-home"></span>
-            Home
-        </a>
-        <a href="stays.html" class="active">
-            <span class="icon-calendar"></span>
-            Stays
-        </a>
-        <a href="profile.html">
-            <span class="icon-user"></span>
-            My Profile
-        </a>
-    </nav>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
     <script src="act/stays.js"></script>
 </body>
 </html>
+

@@ -1,37 +1,74 @@
 // Function to generate a QR code with a random number
 function generateQRCode() {
     const qrCodeContainer = document.getElementById('qrcode');
-    const randomNumberDisplay = document.getElementById('randomNumber');
-
+    
     // Generate a random number
     const randomNumber = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
-
 
     // Clear any existing QR code
     qrCodeContainer.innerHTML = "";
 
-    // QR code options to control size
-    const qrCodeOptions = {
-        width: 256, // Width in pixels
-        margin: 1,  // Margin in modules
-    };
-
-    // Generate QR code as an <img> tag with larger size
-    QRCode.toDataURL(randomNumber.toString(), qrCodeOptions, function (error, url) {
-        if (error) {
-            console.error("Error generating QR code:", error);
-            return;
-        }
-
-        // Create an <img> element and append to container
-        const img = document.createElement('img');
-        img.src = url;
-        img.style.width = `${qrCodeOptions.width}px`; // Set width to match QR code options
-        qrCodeContainer.appendChild(img);
-
-        console.log("QR code generated successfully with random number:", randomNumber);
+    // Generate QR code
+    new QRCode(qrCodeContainer, {
+        text: randomNumber.toString(),
+        width: 256,
+        height: 256,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
     });
+
+    console.log("QR code generated successfully with random number:", randomNumber);
 }
 
-// Automatically generate QR code when the page loads
-window.onload = generateQRCode;
+// Function to handle sharing
+function handleShare() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'My Stay at StaySynced',
+            text: 'Check out my stay at Room 28 - Deluxe with Hot Tub',
+            url: window.location.href
+        })
+        .catch(error => console.log('Error sharing:', error));
+    } else {
+        alert('Sharing is not supported on this browser');
+    }
+}
+
+// Function to handle checkout
+function handleCheckout() {
+    // You can implement your checkout logic here
+    alert('Proceeding to checkout...');
+}
+
+// Add event listeners when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Generate QR code
+    generateQRCode();
+
+    // Add event listeners to buttons
+    document.querySelector('.btn-share').addEventListener('click', handleShare);
+    document.querySelector('.btn-checkout').addEventListener('click', handleCheckout);
+
+    // Set current dates for check-in/out
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    document.getElementById('checkinDate').textContent = today.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    document.getElementById('checkoutDate').textContent = tomorrow.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+});
+
