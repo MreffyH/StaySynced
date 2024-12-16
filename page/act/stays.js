@@ -21,26 +21,21 @@ function generateQRCode() {
     console.log("QR code generated successfully with random number:", randomNumber);
 }
 
-// Function to handle sharing
-function handleShare() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'My Stay at StaySynced',
-            text: 'Check out my stay at Room 28 - Deluxe with Hot Tub',
-            url: window.location.href
-        })
-        .catch(error => console.log('Error sharing:', error));
-    } else {
-        alert('Sharing is not supported on this browser');
-    }
-}
-
 // Function to handle checkout
-function handleCheckout() {
-    // You can implement your checkout logic here
-    alert('Proceeding to checkout...');
-    window.location.href = '../feedback.html';
-}
+document.addEventListener('DOMContentLoaded', function () {
+    // Tambahkan event listener ke tombol checkout
+    document.querySelector('.btn-checkout').addEventListener('click', function (event) {
+        event.preventDefault(); // Mencegah default behavior tombol
+        
+        // Logika sebelum redirect (opsional)
+        alert('Proceeding to feedback page...');
+        
+        // Redirect ke halaman feedback
+        window.location.href = 'feedback.html'; // Pastikan path sesuai dengan lokasi file Anda
+    });
+});
+
+
 
 // Add event listeners when the page loads
 document.addEventListener('DOMContentLoaded', function() {
