@@ -39,6 +39,7 @@ function handleShare() {
 function handleCheckout() {
     // You can implement your checkout logic here
     alert('Proceeding to checkout...');
+    window.location.href = '../feedback.html';
 }
 
 // Add event listeners when the page loads
