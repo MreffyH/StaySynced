@@ -6,9 +6,33 @@
     <title>StaySynced - Feedback</title>
     <link rel="stylesheet" href="style/feedback.css">
     <script type="module" src="../auth/act/session.js" defer></script>
+    <script type="module" src="../data/data.js" defer></script>
 </head>
 <body>
-
+    <!-- Berisi pemilihan rating 1 sampai 5 lalu mengisi deskripsi-->
+    <div class="app"> 
+        <div class="container">
+            <div class="feedback">
+                <h1>Feedback</h1>
+                <form id="feedback-form">
+                    <div class="rating">
+                        <input type="radio" name="rating" id="rating-1" value="1">
+                        <label for="rating-1">★</label>
+                        <input type="radio" name="rating" id="rating-2" value="2">
+                        <label for="rating-2">★</label>
+                        <input type="radio" name="rating" id="rating-3" value="3">
+                        <label for="rating-3">★</label>
+                        <input type="radio" name="rating" id="rating-4" value="4">
+                        <label for="rating-4">★</label>
+                        <input type="radio" name="rating" id="rating-5" value="5">
+                        <label for="rating-5">★</label>
+                    </div>
+                    <textarea name="description" id="description" placeholder="Description"></textarea>
+                    <!-- Nanti diubah ya yg submit sekalian update database -->
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
     <script src="act/feedback.js"></script>
 </body>
 </html>
