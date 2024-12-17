@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/fi
 document.addEventListener('DOMContentLoaded', function() {
     const loggedOutState = document.getElementById('logged-out-state');
     const loggedInState = document.getElementById('logged-in-state');
-    const profileInfo = document.querySelector('.profile-info');
+    const userEmailElement = document.getElementById('.user-email');
     const logoutButton = document.getElementById('logout-button');
 
     onAuthStateChanged(auth, (user) => {
@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loggedInState.classList.remove('hidden');
             
             // Update profile information
-            profileInfo.querySelector('h2').textContent = user.displayName || 'User';
-            profileInfo.querySelector('.email').textContent = user.email;
+            userEmailElement.textContent = user.email;
             
             // Handle logout
             logoutButton.addEventListener('click', () => {
