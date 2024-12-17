@@ -1,16 +1,13 @@
 // Function to generate a QR code with a random number
-function generateQRCode() {
+function generateQRCode(randomNumber) {
     const qrCodeContainer = document.getElementById('qrcode');
-    
-    // Generate a random number
-    const randomNumber = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
 
     // Clear any existing QR code
     qrCodeContainer.innerHTML = "";
 
     // Generate QR code
     new QRCode(qrCodeContainer, {
-        text: randomNumber.toString(),
+        text: randomNumber,
         width: 256,
         height: 256,
         colorDark : "#000000",
@@ -18,33 +15,41 @@ function generateQRCode() {
         correctLevel : QRCode.CorrectLevel.H
     });
 
-    console.log("QR code generated successfully with random number:", randomNumber);
+    console.log("QR code generated successfully with number:", randomNumber);
 }
 
 // Function to handle checkout
 document.addEventListener('DOMContentLoaded', function () {
+    // Cek apakah QR code sudah ada di localStorage
+    let randomNumber = localStorage.getItem('qrCodeNumber');
+
+    // Jika tidak ada, buat nomor acak baru dan simpan ke localStorage
+    if (!randomNumber) {
+        randomNumber = Math.floor(100000 + Math.random() * 900000).toString();
+        localStorage.setItem('qrCodeNumber', randomNumber);
+    }
+
+    // Generate QR code when the page loads
+    generateQRCode(randomNumber);
+
     // Tambahkan event listener ke tombol checkout
     document.querySelector('.btn-checkout').addEventListener('click', function (event) {
         event.preventDefault(); // Mencegah default behavior tombol
         
-        // Logika sebelum redirect (opsional)
-        alert('Proceeding to feedback page...');
+        // Generate a new random number and update localStorage
+        randomNumber = Math.floor(100000 + Math.random() * 900000).toString();
+        localStorage.setItem('qrCodeNumber', randomNumber);
+
+        // Generate a new QR code with the new random number
+        generateQRCode(randomNumber);
         
         // Redirect ke halaman feedback
         window.location.href = 'feedback.html'; // Pastikan path sesuai dengan lokasi file Anda
     });
 });
 
-
-
 // Add event listeners when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Generate QR code
-    generateQRCode();
-
-    // Add event listeners to buttons
-    document.querySelector('.btn-share').addEventListener('click', handleShare);
-    document.querySelector('.btn-checkout').addEventListener('click', handleCheckout);
 
     // Set current dates for check-in/out
     const today = new Date();
@@ -67,4 +72,3 @@ document.addEventListener('DOMContentLoaded', function() {
         minute: '2-digit'
     });
 });
-

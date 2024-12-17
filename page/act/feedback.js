@@ -2,7 +2,7 @@ document.getElementById('feedback-form').addEventListener('submit', function(eve
     event.preventDefault(); // Mencegah pengiriman formulir default
 
     // Pindah ke halaman index
-    window.location.href = '../../index.html'; // Ganti dengan rute halaman tujuan Anda
+    window.location.href = '../index.html'; // Ganti dengan rute halaman tujuan Anda
 });
 
 
