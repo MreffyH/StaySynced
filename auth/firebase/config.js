@@ -8,7 +8,8 @@ const firebaseConfig = {
     storageBucket: "staysynced-latsti.firebasestorage.app",
     messagingSenderId: "947838424448",
     appId: "1:947838424448:web:090e0e21d40404d51f9d65",
-    measurementId: "G-DBE8PC0S4Y"
+    measurementId: "G-DBE8PC0S4Y",
+    databaseURL: "https://staysynced-latsti-default-rtdb.firebaseio.com"
 };
 
 if (!getApps().length) {
