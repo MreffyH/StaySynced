@@ -39,7 +39,8 @@ To run this project locally, all you need is a modern web browser.
 4. Open the project
 Open index.html directly in your browser or launch it using VS Code Live Server.
 
-Course Information
+## Course Information
+
 Course: Layanan Sistem dan Teknologi Informasi (Information Systems and Technology Services)
 
 Institution: School of Electrical Engineering and Informatics (STEI), Institut Teknologi Bandung
